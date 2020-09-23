@@ -10,7 +10,7 @@ services:
         APP_PORT: $APP_PORT
     volumes:
       # 元からあるhtml/index.html,50x.htmlは上書き
-      - ../public:/usr/share/nginx/html
+      - ../docs:/usr/share/nginx/html
     environment:
       - NGINX_HOST=$NGINX_HOST
       - NGINX_PORT=$NGINX_PORT
