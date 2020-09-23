@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+      args: 
+        NGINX_VERSION: $NGINX_VERSION
+        APP_PORT: $APP_PORT
+    volumes:
+      # 元からあるhtml/index.html,50x.htmlは上書き
+      - ../public:/usr/share/nginx/html
+    environment:
+      - NGINX_HOST=$NGINX_HOST
+      - NGINX_PORT=$NGINX_PORT
+    env_file: .env
+    networks:
+        - front
+        - back
+    ports:
+      - "8080:80"
+    container_name: "web_container"
+    hostname: "web_host"
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
